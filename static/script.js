@@ -108,6 +108,6 @@ function postMessage() {
             })
                 .then(result => { console.log(result); input.value = ""; })
                 .catch(error => { console.log(error) })
-        }, 100)
+        }, 50)
     }
 }
