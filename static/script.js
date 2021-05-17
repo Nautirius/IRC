@@ -98,7 +98,7 @@ function postMessage() {
         input.value = "";
     }
     else {  // async
-        fetch('http://localhost:3000/bt', {
+        fetch('https://mk3ib1-irc.herokuapp.com/bt', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
