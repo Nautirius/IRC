@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var path = require("path");
 const PORT = process.env.PORT || 3000;
+var messages = {}
 
 var longpoll = require("express-longpoll")(app);
 // var longpollWithDebug = require("express-longpoll")(app, { DEBUG: true });
@@ -18,14 +19,15 @@ longpoll.create("/poll");
 app.post("/bt", function (req, res) {
     console.log(req.body)
     var data = req.body;
-    setInterval(function () {
-        if (messages.length >= 1) {
-            let message = messages.shift()
-            longpoll.publish("/poll", data)
-        }
-    }, 100)
+    messages.push(data);
     res.end();
 })
+setInterval(function () {
+    if (messages.length >= 1) {
+        let message = messages.shift()
+        longpoll.publish("/poll", message)
+    }
+}, 100);
 
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname + "/static/index.html"));
