@@ -18,7 +18,12 @@ longpoll.create("/poll");
 app.post("/bt", function (req, res) {
     console.log(req.body)
     var data = req.body;
-    longpoll.publish("/poll", data);
+    setInterval(function () {
+        if (messages.length >= 1) {
+            let message = messages.shift()
+            longpoll.publish("/poll", data)
+        }
+    }, 100)
     res.end();
 })
 
