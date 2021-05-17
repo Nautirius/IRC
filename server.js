@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var path = require("path");
 const PORT = process.env.PORT || 3000;
-var messages = {}
+var messages = [];
 
 var longpoll = require("express-longpoll")(app);
 // var longpollWithDebug = require("express-longpoll")(app, { DEBUG: true });
