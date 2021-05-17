@@ -13,6 +13,7 @@ app.use(express.static('static'));
 app.use(express.static('static/css'));
 app.use(express.static('static/images'));
 app.use(express.static('static/libs'));
+app.use(express.static('static/emojis'));
 
 longpoll.create("/poll");
 

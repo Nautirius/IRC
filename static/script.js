@@ -1,15 +1,15 @@
-import { checkText } from 'https://cdn.skypack.dev/smile2emoji'
+// import { checkText } from 'https://cdn.skypack.dev/smile2emoji'
 
 let user = "";
 do { user = prompt("Podaj nazwę użytkownika: "); } while (user === "" || user == null);
 
 let color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-const manageInput = (e) => {
-    e.target.value = checkText(e.target.value);
-};
+// const manageInput = (e) => {
+//     e.target.value = checkText(e.target.value);
+// };
 
 let input = document.getElementById("inputID");
-input.addEventListener("keyup", manageInput);
+// input.addEventListener("keyup", manageInput);
 
 
 let $scrollbar = $("#scrollbar1")
@@ -43,6 +43,7 @@ poll("/poll", function (data) {
     newMessage.appendChild(userName);
     if (data.message.split(" ")[0] === "/tts") {
         let userMessage = document.createElement("span");
+        userMessage.classList.add("message");
         let text = data.message.split(" ");
         text.shift();
         text = text.join(" ");
@@ -54,10 +55,12 @@ poll("/poll", function (data) {
         window.speechSynthesis.speak(msg);
     } else {
         let userMessage = document.createElement("span");
+        userMessage.classList.add("messageTxt");
         userMessage.innerText = data.message;
         newMessage.appendChild(userMessage);
     }
     chatLog.appendChild(newMessage);
+    $('.messageTxt').emoticonize();
     // newMessage.scrollIntoView();
     $scrollbarData.update("bottom");
 });
@@ -87,8 +90,10 @@ function postMessage() {
         userName.style.color = "red";
         newMessage.appendChild(userName);
         let userMessage = document.createElement("span");
+        // userMessage.classList.add("message");
         userMessage.innerText = "amogus";
         newMessage.appendChild(userMessage);
+        // $('.message').emoticonize({})
         chatLog.appendChild(newMessage);
         newMessage.scrollIntoView();
         input.value = "";
