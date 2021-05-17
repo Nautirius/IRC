@@ -98,16 +98,16 @@ function postMessage() {
         input.value = "";
     }
     else {  // async
-        setTimeout(function () {
-            fetch('https://mk3ib1-irc.herokuapp.com/bt', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user: user, color: color, message: input.value })
-            })
-                .then(result => { console.log(result); input.value = ""; })
-                .catch(error => { console.log(error) })
-        }, 50)
+        // setTimeout(function () {
+        fetch('https://mk3ib1-irc.herokuapp.com/bt', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user: user, color: color, message: input.value })
+        })
+            .then(result => { console.log(result); input.value = ""; })
+            .catch(error => { console.log(error) })
+        // }, 50)
     }
 }
