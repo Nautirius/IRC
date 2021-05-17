@@ -27,7 +27,7 @@ var poll = function (url, cb) {
         complete: function () {
             setTimeout(function () {
                 poll(url, cb);
-            }, 200);
+            }, 500);
         },
         timeout: 30000
     });
