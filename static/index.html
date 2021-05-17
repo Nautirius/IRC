@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Czatek.pl</title>
+    <script src="libs/jq.js"></script>
+    <script src="jquery.tinyscrollbar.js"></script>
+    <link rel="stylesheet" href="tinyscrollbar.css">
+    <script defer src="script.js" type="module"></script>
+</head>
+
+<body>
+    <div id="scrollbar1">
+        <div class="scrollbar">
+            <div class="track">
+                <div class="thumb">
+                    <div class="end"></div>
+                </div>
+            </div>
+        </div>
+        <div class="viewport">
+            <div class="overview" id="chat-log"></div>
+        </div>
+    </div>
+    <!-- <div id="chat-log"></div> -->
+    <div id="inputs">
+        <input id="inputID" type="text" size="75">
+        <button id="bt">Wyślij</button>
+    </div>
+    <style>
+        body {
+            font-family: monospace;
+            font-size: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #chat-log {
+            margin: 0 auto;
+            width: 60vw;
+            /* height: 50vh; */
+            /* background-color: lavender; */
+            /* overflow-y: scroll; */
+            /* scrollbar-color: orange blue; */
+
+        }
+
+        #inputs {
+            margin-top: 20px;
+        }
+
+        .message {
+            width: 100%;
+            word-wrap: break-word;
+        }
+
+        .message span {
+            margin-left: 5px;
+        }
+
+        .message :first-child {
+            font-weight: bold;
+        }
+
+        #chat-log::-webkit-scrollbar {
+            width: 1em;
+        }
+
+        /* #chat-log::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        } */
+
+        #chat-log::-webkit-scrollbar-thumb {
+            background-color: lightgray;
+            /* outline: 1px solid slategrey; */
+            border-radius: 90px;
+        }
+    </style>
+</body>
+
+</html>
