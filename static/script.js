@@ -95,7 +95,7 @@ function postMessage() {
         newMessage.appendChild(userMessage);
         // $('.message').emoticonize({})
         chatLog.appendChild(newMessage);
-        // newMessage.scrollIntoView();                                // scrollbar???
+        // newMessage.scrollIntoView();
         $scrollbarData.update("bottom");
         input.value = "";
     } else if (input.value.indexOf("/clear") !== -1 || input.value.indexOf("/cls") !== -1) {
@@ -105,8 +105,8 @@ function postMessage() {
     }
     else {  // async
         var sendPromise = new Promise((resolve, reject) => {
-            // fetch('https://mk3ib1-irc.herokuapp.com/bt', {
-            fetch('http://localhost:3000/bt', {
+            fetch('https://mk3ib1-irc.herokuapp.com/bt', {
+                // fetch('http://localhost:3000/bt', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
