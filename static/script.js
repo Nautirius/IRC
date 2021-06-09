@@ -11,9 +11,8 @@ let color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 let input = document.getElementById("inputID");
 // input.addEventListener("keyup", manageInput);
 
-
-let $scrollbar = $("#scrollbar1")
-$scrollbar.tinyscrollbar()
+let $scrollbar = $("#scrollbar1");
+$scrollbar.tinyscrollbar();
 let $scrollbarData = $scrollbar.data("plugin_tinyscrollbar");
 
 
@@ -27,7 +26,7 @@ var poll = function (url, cb) {
         complete: function () {
             setTimeout(function () {
                 poll(url, cb);
-            }, 500);
+            }, 100);
         },
         timeout: 30000
     });
@@ -49,9 +48,10 @@ poll("/poll", function (data) {
         text = text.join(" ");
         userMessage.innerText = text;
         newMessage.appendChild(userMessage);
+        userMessage.classList.add("messageTxt");
 
         const msg = new SpeechSynthesisUtterance();
-        msg.text = text;
+        msg.text = data.user + " pisze: " + text;
         window.speechSynthesis.speak(msg);
     } else {
         let userMessage = document.createElement("span");
@@ -95,7 +95,8 @@ function postMessage() {
         newMessage.appendChild(userMessage);
         // $('.message').emoticonize({})
         chatLog.appendChild(newMessage);
-        newMessage.scrollIntoView();
+        // newMessage.scrollIntoView();                                // scrollbar???
+        $scrollbarData.update("bottom");
         input.value = "";
     } else if (input.value.indexOf("/clear") !== -1 || input.value.indexOf("/cls") !== -1) {
         let chatLog = document.getElementById("chat-log");
@@ -103,16 +104,20 @@ function postMessage() {
         input.value = "";
     }
     else {  // async
-        // setTimeout(function () {
-        fetch('https://mk3ib1-irc.herokuapp.com/bt', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ user: user, color: color, message: input.value })
-        })
-            .then(result => { console.log(result); input.value = ""; })
-            .catch(error => { console.log(error) })
-        // }, 50)
+        var sendPromise = new Promise((resolve, reject) => {
+            // fetch('https://mk3ib1-irc.herokuapp.com/bt', {
+            fetch('http://localhost:3000/bt', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user: user, color: color, message: input.value })
+            })
+                .then(result => { resolve(result); input.value = ""; })
+                .catch(error => { reject(error) })
+        });
+        sendPromise.then(outcome => {
+            console.log(outcome);
+        });
     }
 }
